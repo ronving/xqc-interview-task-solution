@@ -56,9 +56,9 @@ public class UserController {
 
     @ApiOperation(value = "update user")
     @PutMapping("/{id}")
-    Response<User> updateUser(@PathVariable Long id) {
+    Response<User> updateUser(@PathVariable Long id, User updates) {
         User user = userService.findById(id);
-        User userResponse = userService.update(user);
+        User userResponse = userService.update(id, updates);
         if (userResponse == null) {
             return new Response<>(Status.BAD_REQUEST, "user doesn't exist");
         }
@@ -72,6 +72,6 @@ public class UserController {
         if (isDeleted) {
             return new Response(Status.SUCCESS, "user deleted successfully");
         }
-        return new Response(Status.BAD_REQUEST, "something went wrong");
+        return new Response(Status.FAIL, "something went wrong");
     }
 }

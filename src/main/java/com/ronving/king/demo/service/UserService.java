@@ -9,6 +9,6 @@ public interface UserService {
     User findByUsername(String username);
     List<User> findAll();
     User addNew(User user);
-    User update(User user);
+    User update(Long id, User user);
     boolean delete(Long id);
 }

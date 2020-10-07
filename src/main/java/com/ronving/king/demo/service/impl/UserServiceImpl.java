@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User user) {
-        User userFromDb = userRepository.findUserById(user.getId());
+    public User update(Long id, User user) {
+        User userFromDb = userRepository.findUserById(id);
         if (userFromDb != null) {
             userFromDb.setUsername(user.getUsername());
             userFromDb.setPassword(user.getPassword());
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
     public boolean delete(Long id) {
         userRepository.deleteById(id);
 
-        if (userRepository.findById(id) == null) {
+        if (userRepository.findUserById(id) == null) {
             return true;
         }
         return false;
