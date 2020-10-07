@@ -4,11 +4,14 @@ import com.ronving.king.demo.entity.User;
 import com.ronving.king.demo.service.UserService;
 import com.ronving.king.demo.util.Response;
 import com.ronving.king.demo.util.Status;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = "/user")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -19,6 +22,9 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ApiOperation(
+            value = "Get all users",
+            notes = "List of all users exists")
     @GetMapping
     Response<List<User>> getFullUserList() {
         List<User> users = userService.findAll();
@@ -28,6 +34,7 @@ public class UserController {
         return new Response<>(Status.SUCCESS, users, "users found");
     }
 
+    @ApiOperation(value = "Get user by id")
     @GetMapping("/{id}")
     Response<User> getUser(@PathVariable Long id) {
         User userResponse = userService.findById(id);
@@ -37,6 +44,7 @@ public class UserController {
         return new Response<>(Status.SUCCESS, userResponse, "user found");
     }
 
+    @ApiOperation(value = "add new user")
     @PostMapping
     Response<User> addNewUser(@RequestBody User user) {
         User userResponse = userService.addNew(user);
@@ -46,6 +54,7 @@ public class UserController {
         return new Response<>(Status.SUCCESS, userResponse, "user created");
     }
 
+    @ApiOperation(value = "update user")
     @PutMapping("/{id}")
     Response<User> updateUser(@PathVariable Long id) {
         User user = userService.findById(id);
@@ -56,6 +65,7 @@ public class UserController {
         return new Response<>(Status.SUCCESS, userResponse, "user updated successfully");
     }
 
+    @ApiOperation(value = "delete user")
     @DeleteMapping("/{id}")
     Response deleteUser(@PathVariable Long id) {
         boolean isDeleted = userService.delete(id);
