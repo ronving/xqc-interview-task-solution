@@ -5,9 +5,10 @@ import com.ronving.king.demo.entity.User;
 import java.util.List;
 
 public interface UserService {
-    User findUserById(Long id);
-    List<User> findAllUsers();
-    User saveUser(User user);
-    User updateUser(User user);
-    boolean deleteUser(User user);
+    User findById(Long id);
+    User findByUsername(String username);
+    List<User> findAll();
+    User addNew(User user);
+    User update(User user);
+    boolean delete(Long id);
 }

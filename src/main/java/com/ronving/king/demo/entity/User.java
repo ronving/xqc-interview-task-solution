@@ -1,5 +1,6 @@
 package com.ronving.king.demo.entity;
 
+import com.ronving.king.demo.util.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

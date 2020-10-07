@@ -19,27 +19,53 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(Long id) {
+    public User findById(Long id) {
+        User user = userRepository.findUserById(id);
+        return user;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        return user;
+    }
+
+    @Override
+    public List<User> findAll() {
+        List<User> fullUserList = userRepository.findAll();
+        return fullUserList;
+    }
+
+    @Override
+    public User addNew(User user) {
+        User alreadyExists = userRepository.findByUsername(user.getUsername());
+
+        if (alreadyExists == null) {
+            return userRepository.save(user);
+        }
+
         return null;
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public User update(User user) {
+        User userFromDb = userRepository.findUserById(user.getId());
+        if (userFromDb != null) {
+            userFromDb.setUsername(user.getUsername());
+            userFromDb.setPassword(user.getPassword());
+            return userRepository.save(userFromDb);
+        }
+
         return null;
     }
 
     @Override
-    public User saveUser(User user) {
-        return null;
-    }
+    public boolean delete(Long id) {
+        userRepository.deleteById(id);
 
-    @Override
-    public User updateUser(User user) {
-        return null;
-    }
-
-    @Override
-    public boolean deleteUser(User user) {
+        if (userRepository.findById(id) == null) {
+            return true;
+        }
         return false;
     }
 }

@@ -1,4 +1,4 @@
-package com.ronving.king.demo.entity;
+package com.ronving.king.demo.util;
 
 public enum Role
 {
