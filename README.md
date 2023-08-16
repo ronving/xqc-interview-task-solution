@@ -1,10 +1,5 @@
 # xqc-task
 
-### Installation
-
-```bash
-git clone https://github.com/ronving/xqc-task
-```
 Configure PostgreSQL DB with credentials:
 ```bash
 datasource.url=jdbc:postgresql://localhost:5432/xqc
